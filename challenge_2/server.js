@@ -16,7 +16,7 @@ const app = express();
 app.use(express.static('./client'));
 
 app.post('/', (req, res, next) => {
-  console.log('got a post request');
+  res.send([1,2,3]);
 });
 
 app.listen(3000, () => console.log('...app listening on port 3000!'));
