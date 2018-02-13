@@ -34,16 +34,19 @@ app.post('/', (req, res, next) => {
   // push them comma separated onto the string on their own line
   // recurse and do the same with every object in the children
 
-  var csvString = '';
+  var csvArray = [];
+  var csvHeaders = [];
+  var csvValues = [];
+  
 
   for (var key in jsonData) {
-    csvString += key + ',';
+    csvHeaders.push(key);
   }
 
   
 
 
-  res.send(csvString);
+  res.send(csvHeaders.join(','));
   next();
 });
 
