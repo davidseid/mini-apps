@@ -14,6 +14,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+app.use((req, res, next) => {
+  console.log(`Received ${req.method} request from ${req.url}`);
+  next();
+})
+
+app.use(bodyParser.json());
 
 app.post('/', (req, res, next) => {
 
@@ -21,7 +27,7 @@ app.post('/', (req, res, next) => {
   // grab the form data as JSON string (probably via chunking)
   // convert it to CSV
   // send it back as stringified CSV
-
+  console.log(req);
 
 
 

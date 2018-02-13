@@ -17,10 +17,25 @@ $(document).ready(function () {
     // submit a post request to the server with that information
     var textInput = $('textarea').val();
     var JSONifiedInput = JSON.stringify(textInput);
-   
-    $.post('/', JSONifiedInput, (data) => {
-      console.log(data);
-    });
+
+    $.ajax({
+      url: '/',
+      method: "POST",
+      data: {JSONifiedInput},
+      success: (data) => {
+        console.log('Received response from server!');
+        console.log(data);
+      },
+      error: () => {
+        console.log('Received error from server :(');
+      }
+    })
+
+    // $.post('/', JSONifiedInput, (data) => {
+    //   console.log(data);
+
+    //   // eventually need to append to the DOM
+    // });
   });
 
 })
