@@ -11,12 +11,24 @@
 
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
-app.use(express.static('./client'));
 
 app.post('/', (req, res, next) => {
+
+  // TODO: 
+  // grab the form data as JSON string (probably via chunking)
+  // convert it to CSV
+  // send it back as stringified CSV
+
+
+
+
   res.send([1,2,3]);
+  next();
 });
+
+app.use(express.static('./client'));
 
 app.listen(3000, () => console.log('...app listening on port 3000!'));
