@@ -9,6 +9,11 @@
   // assume child properties in JSON will be in property called children, assume no other props
    // any props besides children must be mapped to a column in CSV
 
-// 1. Make Basic HTML page
-// 2. Set up package.json
-// 3. Implement basic Express Server and get them to communicate
+
+const express = require('express');
+const app = express();
+
+app.use(express.static('./client'));
+
+
+app.listen(3000, () => console.log('...app listening on port 3000!'));
