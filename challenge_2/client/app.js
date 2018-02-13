@@ -21,7 +21,7 @@ $(document).ready(function () {
     $.ajax({
       url: '/',
       method: "POST",
-      data: {JSONifiedInput},
+      data: JSON.stringify({'data': textInput}),
       success: (data) => {
         console.log('Received response from server!');
         console.log(data);
@@ -31,11 +31,6 @@ $(document).ready(function () {
       }
     })
 
-    // $.post('/', JSONifiedInput, (data) => {
-    //   console.log(data);
-
-    //   // eventually need to append to the DOM
-    // });
   });
 
 })
