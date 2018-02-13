@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 app.post('/', (req, res, next) => {
 
   var jsonData = req.body;
+  console.log(jsonData);
 
 
   // CONVERT TO CSV
@@ -38,15 +39,19 @@ app.post('/', (req, res, next) => {
   var csvHeaders = [];
   var csvValues = [];
   
-
+  // Get headers
   for (var key in jsonData) {
-    csvHeaders.push(key);
+    if (key !== 'children') {
+      csvHeaders.push(key);
+      csvValues.push(jsonData[key]);
+    }
   }
 
-  
+  // Get values from the first object and add underneath
+  csvArray.push(csvHeaders);
+  csvArray.push(csvValues);
 
-
-  res.send(csvHeaders.join(','));
+  res.send(csvArray);
   next();
 });
 

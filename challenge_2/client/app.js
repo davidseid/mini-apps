@@ -10,8 +10,13 @@
 
 $(document).ready(function () {
 
-  var appendCSVToDom = function(csvString) {
-    $('.csv').text(csvString);
+  var appendCSVToDom = function(csvArray) {
+    var firstLine = csvArray[0];
+    var rest = csvArray.slice(1);
+    $('.csv').text(firstLine);
+    $('.csv').append('<br/>');
+    $('.csv').append(rest);
+    
   }
 
   $('button').on('click', (e) => {
@@ -28,6 +33,7 @@ $(document).ready(function () {
       contentType: 'application/json',
       success: (data) => {
         console.log('Received response from server!');
+        console.log(data);
         appendCSVToDom(data);
       },
       error: () => {
