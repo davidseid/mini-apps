@@ -13,7 +13,14 @@ $(document).ready(function () {
   $('button').on('click', (e) => {
     e.preventDefault();
 
-    console.log('hi not refreshing page');
+    // capture the current textarea field info
+    // submit a post request to the server with that information
+    var textInput = $('textarea').val();
+    var JSONifiedInput = JSON.stringify(textInput);
+   
+    $.post('/', JSONifiedInput, (data) => {
+      console.log(data);
+    });
   });
 
 })
