@@ -19,15 +19,27 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.post('/', (req, res, next) => {
 
-  // TODO: 
-  // grab the form data as JSON string (probably via chunking)
-  // convert it to CSV
-  // send it back as stringified CSV
-  console.log(req.body);
+  var jsonData = req.body;
+
+  console.log(jsonData);
+  console.log(typeof jsonData);
+
+  // CONVERT TO CSV
+  // make a string to to hold everything
+  // loop through the keys in the object
+  // add each key, if not children, comma separated to the first line
+  // for each key in the jsonObject, grab the associated values for each key
+  // push them comma separated onto the string on their own line
+  // recurse and do the same with every object in the children
+
+  var csvString = '';
+
+
+
   
 
 

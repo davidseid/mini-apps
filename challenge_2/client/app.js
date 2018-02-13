@@ -15,12 +15,13 @@ $(document).ready(function () {
 
     // capture the current textarea field info
     // submit a post request to the server with that information
-    var textInput = $('textarea').val();
+    var json = $('textarea').val();
     
     $.ajax({
       url: 'http://localhost:3000',
       method: "POST",
-      data: {'data': textInput},
+      data: json,
+      contentType: 'application/json',
       success: (data) => {
         console.log('Received response from server!');
         console.log(data);
