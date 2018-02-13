@@ -25,8 +25,6 @@ app.post('/', (req, res, next) => {
 
   var jsonData = req.body;
 
-  console.log(jsonData);
-  console.log(typeof jsonData);
 
   // CONVERT TO CSV
   // make a string to to hold everything
@@ -38,12 +36,14 @@ app.post('/', (req, res, next) => {
 
   var csvString = '';
 
-
+  for (var key in jsonData) {
+    csvString += key + ',';
+  }
 
   
 
 
-  res.send([1,2,3]);
+  res.send(csvString);
   next();
 });
 

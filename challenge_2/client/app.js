@@ -10,6 +10,10 @@
 
 $(document).ready(function () {
 
+  var appendCSVToDom = function(csvString) {
+    $('.csv').text(csvString);
+  }
+
   $('button').on('click', (e) => {
     e.preventDefault();
 
@@ -24,7 +28,7 @@ $(document).ready(function () {
       contentType: 'application/json',
       success: (data) => {
         console.log('Received response from server!');
-        console.log(data);
+        appendCSVToDom(data);
       },
       error: () => {
         console.log('Received error from server :(');
