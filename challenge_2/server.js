@@ -1,31 +1,20 @@
-// serve up an index.html file and associateda assets via express
-// recieve JSON data from client app, and send back CSV formatted response
-// implement report generation logic on the server without external libraries
-
-// create a package.json to store project dependencies
-
-// assume the JSON data is regular. 
-// flatten and map the JSON into a single line of CSV
-  // assume child properties in JSON will be in property called children, assume no other props
-   // any props besides children must be mapped to a column in CSV
-
-
+// *** Express Setup *** 
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+// *** MiddleWare ***
 app.use((req, res, next) => {
   console.log(`Received ${req.method} request to ${req.url}`);
   next();
 })
-
 app.use(bodyParser.json());
 
+
+// *** Primary Post Request Handler ***
 app.post('/', (req, res, next) => {
 
   var jsonData = req.body;
-
-
   var csvArray = [];
   var csvHeaders = ['id'];
   var csvValues = [];
@@ -35,7 +24,6 @@ app.post('/', (req, res, next) => {
       csvHeaders.push(key);
     }
   }
-
   csvHeaders.push('parentId');
   
   var idIncrementer = 1;
@@ -63,7 +51,6 @@ app.post('/', (req, res, next) => {
   }
 
   recurse(jsonData, null);
-  
   csvArray.push(csvHeaders);
   csvArray.push(csvValues);
 
@@ -71,6 +58,8 @@ app.post('/', (req, res, next) => {
   next();
 });
 
+// *** Serve Up Index.html ***
 app.use(express.static('./client'));
 
+// *** Listen to Port ***
 app.listen(3000, () => console.log('...app listening on port 3000!'));
