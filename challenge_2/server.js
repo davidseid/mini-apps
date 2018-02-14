@@ -35,30 +35,34 @@ app.post('/', (req, res, next) => {
       csvHeaders.push(key);
     }
   }
+
+  csvHeaders.push('parentId');
   
   var idIncrementer = 1;
-  var recurse = function(obj) {
+
+  var recurse = function(obj, parentId) {
     var values = [];
     values.push(idIncrementer);
     idIncrementer++;
+
     for (var key in obj) {
       if (key !== 'children') {
         values.push(obj[key]);
       }
-      console.log(values);
       if (key === 'children') {
+        values.push(parentId);
         csvValues.push(values);
         if (obj[key].length > 0) {
           for (var i = 0; i < obj[key].length; i++) {
             var child = obj[key][i];
-            recurse(child);
+            recurse(child, parentId + 1);
           }
         }
       }
     }
   }
 
-  recurse(jsonData);
+  recurse(jsonData, null);
   
   csvArray.push(csvHeaders);
   csvArray.push(csvValues);
