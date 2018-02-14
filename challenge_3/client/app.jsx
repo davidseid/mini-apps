@@ -13,46 +13,55 @@
 // have babel watch for changes in app
 // use nodemon
 
-// Give each row a class that corresponds to its row
-// Give each square a class that corresponds to its row and column
+
+
+// 1. Allow the user to click on a box and have it turn red
+
+
+
+
 
 //**** MY MODEL **** //
 
-// board setup
+// board initialization
 var board = [];
 var row = [];
 var square = [];
-
 for (var j = 0; j < 7; j++) {
   row.push(square);
 }
-console.log(row);
-
 for (var i = 0; i < 6; i++) {
   board.push(row);
 }
-
 var rowNum = -1;
 var colNum = -1;
-
-
 
 
 // make an App Component
 function App() {
   return (
     <div>
-      My App
+      Connect Four
       <Board />
     </div>
   );
 }
 
+
+
 // make a Board Component
 class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { board: board };
+    this.state = { 
+      board: board, 
+      turn: 'red',
+      result: null
+    };
+  }
+
+  placePiece() {
+    console.log('clicked!');
   }
 
   render() {
@@ -61,12 +70,13 @@ class Board extends React.Component {
         Game Board
         {board.map((row) => {
           rowNum += 1;
-          return <Row key={rowNum} row={rowNum}/>
+          return <Row placePiece={this.placePiece} key={rowNum} row={rowNum}/>
         })}
       </div>
     );
   }
 }
+
 
 // make a Row Component
 function Row(props) {
@@ -74,7 +84,7 @@ function Row(props) {
     <div className='row'>
       {row.map((square) => {
         colNum++;
-        return <Square key={colNum} x={props.row} y={colNum}/>
+        return <Square placePiece={props.placePiece} key={colNum} x={props.row} y={colNum}/>
       })}
     </div>
   )
@@ -83,7 +93,7 @@ function Row(props) {
 // make a square component
 function Square(props) {
   return (
-    <div className='square'>
+    <div onClick={props.placePiece} className='square'>
       {board[props.x][props.y]}
     </div>
   )
