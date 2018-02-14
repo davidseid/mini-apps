@@ -20,10 +20,40 @@ function App() {
   return (
     <div>
       My App
+      <Board />
     </div>
   );
 }
 
+// make a Board Component
+function Board() {
+  return (
+    <div>
+      My Board
+      <Row />
+    </div>
+  );
+}
+
+// make a Row Component
+
+function Row() {
+  return (
+    <div>
+      Row
+      <Square />
+    </div>
+  )
+}
+
+// make a square component
+function Square() {
+  return (
+    <div>
+      Square
+    </div>
+  )
+}
 
 
 ReactDOM.render(
