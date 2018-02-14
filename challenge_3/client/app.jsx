@@ -13,9 +13,6 @@
 // have babel watch for changes in app
 // use nodemon
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
 
 
 // make an App Component
