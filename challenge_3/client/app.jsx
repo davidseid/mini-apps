@@ -13,9 +13,8 @@
 // have babel watch for changes in app
 // use nodemon
 
-// 1: automatically render 6 rows 
-// 2: automatically render 7 squares in each row
-// have the rendering based on actual model
+// Give each row a class that corresponds to its row
+// Give each square a class that corresponds to its row and column
 
 //**** MY MODEL **** //
 
@@ -33,7 +32,8 @@ for (var i = 0; i < 6; i++) {
   board.push(row);
 }
 
-
+var rowNum = -1;
+var colNum = -1;
 
 
 // make an App Component
@@ -50,25 +50,29 @@ function App() {
 function Board() {
   return (
     <div className="board">
-      My Board
-      <Row />
+      Game Board
+      {board.map((row) => {
+        rowNum += 1;
+        return <Row row={rowNum}/>
+      })}
     </div>
   );
 }
 
 // make a Row Component
-function Row() {
+function Row(props) {
   return (
     <div className='row'>
       {row.map((square) => {
-        return <Square />
+        colNum++;
+        return <Square x={props.row} y={colNum}/>
       })}
     </div>
   )
 }
 
 // make a square component
-function Square() {
+function Square(props) {
   return (
     <div className='square'>
     </div>
