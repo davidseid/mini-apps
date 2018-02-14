@@ -18,9 +18,6 @@
 // 1. Allow the user to click on a box and have it turn red
 
 
-
-
-
 //**** MY MODEL **** //
 
 // board initialization
@@ -60,8 +57,11 @@ class Board extends React.Component {
     };
   }
 
-  placePiece() {
-    console.log('clicked!');
+  placePiece(x, y) {
+    console.log(x, y)
+    // set the value of the square to the turn
+    // if the turn is red, change to black
+    // if the turn is black, change to red
   }
 
   render() {
@@ -70,7 +70,7 @@ class Board extends React.Component {
         Game Board
         {board.map((row) => {
           rowNum += 1;
-          return <Row placePiece={this.placePiece} key={rowNum} row={rowNum}/>
+          return <Row placePiece={this.placePiece.bind(this)} key={rowNum} row={rowNum}/>
         })}
       </div>
     );
@@ -84,6 +84,7 @@ function Row(props) {
     <div className='row'>
       {row.map((square) => {
         colNum++;
+        colNum = colNum % 7;
         return <Square placePiece={props.placePiece} key={colNum} x={props.row} y={colNum}/>
       })}
     </div>
@@ -93,7 +94,7 @@ function Row(props) {
 // make a square component
 function Square(props) {
   return (
-    <div onClick={props.placePiece} className='square'>
+    <div onClick={() => {props.placePiece(props.x, props.y)}} className='square'>
       {board[props.x][props.y]}
     </div>
   )
