@@ -1,5 +1,17 @@
 
 $(document).ready(function () {
+  
+
+  // add form field to input filter string
+  // add button to submit filter
+  // save the filter string on the model (or closure scope)
+  // change the render function so that it only renders objects
+  // that don't have that string
+  // and also doesn't render their children
+
+  // then refactor the render function to dynamically add ids and parent ids based on that
+
+
 
   var csvReport;
 
@@ -17,7 +29,7 @@ $(document).ready(function () {
     }
   }
 
-  $('button').on('click', (e) => {
+  $('.submit').on('click', (e) => {
     e.preventDefault();
 
     var json = $('textarea').val();

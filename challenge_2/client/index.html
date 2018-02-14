@@ -9,12 +9,16 @@
   <form action='' method="get">
     JSON Data: <br>
     <textarea name="textToTransfer" rows="20" cols="50"></textarea>
-    <button>Submit</button>
+    <button class="submit">Submit</button>
   </form>
   <div>
     CSV Results Go Here:
     <div class="csv">
     </div>
+  </div>
+  <div>
+    <input type="text" placeholder="Input a filter string"/>
+    <button class="filter">Filter</button> 
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="./app.js"></script>
