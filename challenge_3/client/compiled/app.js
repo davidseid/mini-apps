@@ -1,0 +1,32 @@
+'use strict';
+
+// build UI with reactjs and precompile views with babel
+// all game logic should live in the client code
+
+// all react components can live in this file
+
+// detect win or tie and display appropriate message
+// page refresh restarts the game
+
+// WRITE FOUR TESTS for end of game logic
+// can run tests in node or browser
+
+// minimal css styling
+// have babel watch for changes in app
+// use nodemon
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+
+
+// make an App Component
+function App() {
+  return React.createElement(
+    'div',
+    null,
+    'My App'
+  );
+}
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL2FwcC5qc3giXSwibmFtZXMiOlsiQXBwIiwiUmVhY3RET00iLCJyZW5kZXIiLCJkb2N1bWVudCIsImdldEVsZW1lbnRCeUlkIl0sIm1hcHBpbmdzIjoiOztBQUFBO0FBQ0E7O0FBRUE7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBOzs7QUFJQTtBQUNBLFNBQVNBLEdBQVQsR0FBZTtBQUNiLFNBQ0U7QUFBQTtBQUFBO0FBQUE7QUFBQSxHQURGO0FBS0Q7O0FBSURDLFNBQVNDLE1BQVQsQ0FDRSxvQkFBQyxHQUFELE9BREYsRUFFRUMsU0FBU0MsY0FBVCxDQUF3QixLQUF4QixDQUZGIiwiZmlsZSI6ImFwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIGJ1aWxkIFVJIHdpdGggcmVhY3RqcyBhbmQgcHJlY29tcGlsZSB2aWV3cyB3aXRoIGJhYmVsXG4vLyBhbGwgZ2FtZSBsb2dpYyBzaG91bGQgbGl2ZSBpbiB0aGUgY2xpZW50IGNvZGVcblxuLy8gYWxsIHJlYWN0IGNvbXBvbmVudHMgY2FuIGxpdmUgaW4gdGhpcyBmaWxlXG5cbi8vIGRldGVjdCB3aW4gb3IgdGllIGFuZCBkaXNwbGF5IGFwcHJvcHJpYXRlIG1lc3NhZ2Vcbi8vIHBhZ2UgcmVmcmVzaCByZXN0YXJ0cyB0aGUgZ2FtZVxuXG4vLyBXUklURSBGT1VSIFRFU1RTIGZvciBlbmQgb2YgZ2FtZSBsb2dpY1xuLy8gY2FuIHJ1biB0ZXN0cyBpbiBub2RlIG9yIGJyb3dzZXJcblxuLy8gbWluaW1hbCBjc3Mgc3R5bGluZ1xuLy8gaGF2ZSBiYWJlbCB3YXRjaCBmb3IgY2hhbmdlcyBpbiBhcHBcbi8vIHVzZSBub2RlbW9uXG5cbi8vIGltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG4vLyBpbXBvcnQgUmVhY3RET00gZnJvbSAncmVhY3QtZG9tJztcblxuXG5cbi8vIG1ha2UgYW4gQXBwIENvbXBvbmVudFxuZnVuY3Rpb24gQXBwKCkge1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICBNeSBBcHBcbiAgICA8L2Rpdj5cbiAgKTtcbn1cblxuXG5cblJlYWN0RE9NLnJlbmRlcihcbiAgPEFwcCAvPixcbiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2FwcCcpXG4pO1xuXG5cblxuXG5cblxuXG5cblxuIl19
