@@ -49,16 +49,23 @@ function App() {
 }
 
 // make a Board Component
-function Board() {
-  return (
-    <div className="board">
-      Game Board
-      {board.map((row) => {
-        rowNum += 1;
-        return <Row key={rowNum} row={rowNum}/>
-      })}
-    </div>
-  );
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { board: board };
+  }
+
+  render() {
+    return (
+      <div className="board">
+        Game Board
+        {board.map((row) => {
+          rowNum += 1;
+          return <Row key={rowNum} row={rowNum}/>
+        })}
+      </div>
+    );
+  }
 }
 
 // make a Row Component
