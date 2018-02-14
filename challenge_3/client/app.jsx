@@ -27,12 +27,12 @@ var square = [];
 for (var j = 0; j < 7; j++) {
   row.push(square);
 }
+console.log(row);
 
 for (var i = 0; i < 6; i++) {
   board.push(row);
 }
 
-console.table(board);
 
 
 
@@ -60,8 +60,9 @@ function Board() {
 function Row() {
   return (
     <div className='row'>
-      Row
-      <Square />
+      {row.map((square) => {
+        return <Square />
+      })}
     </div>
   )
 }
