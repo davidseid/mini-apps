@@ -24,7 +24,6 @@ app.use(bodyParser.json());
 app.post('/', (req, res, next) => {
 
   var jsonData = req.body;
-  console.log(jsonData);
 
 
   // CONVERT TO CSV
@@ -43,9 +42,36 @@ app.post('/', (req, res, next) => {
   for (var key in jsonData) {
     if (key !== 'children') {
       csvHeaders.push(key);
-      csvValues.push(jsonData[key]);
     }
   }
+  
+  var recurse = function(obj) {
+    var values = [];
+    for (var key in obj) {
+      if (key !== 'children') {
+        values.push(obj[key]);
+      }
+      console.log(values);
+      if (key === 'children') {
+        csvValues.push(values);
+        if (obj[key].length > 0) {
+          for (var i = 0; i < obj[key].length; i++) {
+            var child = obj[key][i];
+            recurse(child);
+          }
+        }
+      }
+    }
+  }
+
+  recurse(jsonData);
+  
+  // loop through the object
+  // create an array of values
+  // push each value to the array
+  // for each object in children recurse
+
+
 
   // Get values from the first object and add underneath
   csvArray.push(csvHeaders);
