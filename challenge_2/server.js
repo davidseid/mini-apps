@@ -26,27 +26,21 @@ app.post('/', (req, res, next) => {
   var jsonData = req.body;
 
 
-  // CONVERT TO CSV
-  // make a string to to hold everything
-  // loop through the keys in the object
-  // add each key, if not children, comma separated to the first line
-  // for each key in the jsonObject, grab the associated values for each key
-  // push them comma separated onto the string on their own line
-  // recurse and do the same with every object in the children
-
   var csvArray = [];
-  var csvHeaders = [];
+  var csvHeaders = ['id'];
   var csvValues = [];
   
-  // Get headers
   for (var key in jsonData) {
     if (key !== 'children') {
       csvHeaders.push(key);
     }
   }
   
+  var idIncrementer = 1;
   var recurse = function(obj) {
     var values = [];
+    values.push(idIncrementer);
+    idIncrementer++;
     for (var key in obj) {
       if (key !== 'children') {
         values.push(obj[key]);
@@ -66,14 +60,6 @@ app.post('/', (req, res, next) => {
 
   recurse(jsonData);
   
-  // loop through the object
-  // create an array of values
-  // push each value to the array
-  // for each object in children recurse
-
-
-
-  // Get values from the first object and add underneath
   csvArray.push(csvHeaders);
   csvArray.push(csvValues);
 
