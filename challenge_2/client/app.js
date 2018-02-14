@@ -12,10 +12,16 @@ $(document).ready(function () {
 
   var appendCSVToDom = function(csvArray) {
     var firstLine = csvArray[0];
-    var rest = csvArray.slice(1);
+    var rest = csvArray.slice(1)[0];
     $('.csv').text(firstLine);
     $('.csv').append('<br/>');
-    $('.csv').append(rest);
+    console.log(rest);
+    
+    for (var i = 0; i < rest.length; i++) {
+      var values = rest[i];
+      $('.csv').append(values.join(','));
+      $('.csv').append('<br/>');
+    }
     
   }
 
