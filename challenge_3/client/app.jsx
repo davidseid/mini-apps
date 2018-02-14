@@ -36,6 +36,8 @@ var rowNum = -1;
 var colNum = -1;
 
 
+
+
 // make an App Component
 function App() {
   return (
@@ -53,7 +55,7 @@ function Board() {
       Game Board
       {board.map((row) => {
         rowNum += 1;
-        return <Row row={rowNum}/>
+        return <Row key={rowNum} row={rowNum}/>
       })}
     </div>
   );
@@ -65,7 +67,7 @@ function Row(props) {
     <div className='row'>
       {row.map((square) => {
         colNum++;
-        return <Square x={props.row} y={colNum}/>
+        return <Square key={colNum} x={props.row} y={colNum}/>
       })}
     </div>
   )
@@ -75,6 +77,7 @@ function Row(props) {
 function Square(props) {
   return (
     <div className='square'>
+      {board[props.x][props.y]}
     </div>
   )
 }
