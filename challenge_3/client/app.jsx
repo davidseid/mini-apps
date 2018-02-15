@@ -107,7 +107,7 @@ var checkForMinorDiagonalWin = (color, board, x, y) => {
 // board initialization
 var board = [];
 var row = [];
-var square = '';
+var square = 'white';
 for (var j = 0; j < 7; j++) {
   row.push(square);
 }
@@ -178,8 +178,8 @@ class Board extends React.Component {
       }
 
       if (this.state.turn === 'red') {
-        this.setState({turn: 'black'})
-      } else if (this.state.turn === 'black') {
+        this.setState({turn: 'yellow'})
+      } else if (this.state.turn === 'yellow') {
         this.setState({turn: 'red'})
       }
     }
@@ -215,7 +215,7 @@ function Row(props) {
 // make a square component
 function Square(props) {
   return (
-    <div className="container">
+    <div className="container" style={{background: 'blue'}}>
      <div onClick={() => {props.placePiece(props.x, props.y)}} className='square' style={{background: board[props.x][props.y]}}>
       </div>
     </div>
