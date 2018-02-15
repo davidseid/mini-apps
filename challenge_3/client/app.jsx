@@ -58,10 +58,13 @@ class Board extends React.Component {
   }
 
   placePiece(x, y) {
-    console.log(x, y)
-    console.log(board)
     board[x][y] = this.state.turn;
     this.setState({board: board});
+    if (this.state.turn === 'red') {
+      this.setState({turn: 'black'})
+    } else if (this.state.turn === 'black') {
+      this.setState({turn: 'red'})
+    }
     // board = this.state.board;
     // board[x][y] = this.state.turn;
     // this.setState({board: board});
@@ -97,8 +100,7 @@ function Row(props) {
 // make a square component
 function Square(props) {
   return (
-    <div onClick={() => {props.placePiece(props.x, props.y)}} className='square'>
-      {board[props.x][props.y]}
+    <div onClick={() => {props.placePiece(props.x, props.y)}} className='square' style={{background: board[props.x][props.y]}}>
     </div>
   )
 }
