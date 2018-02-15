@@ -23,7 +23,7 @@
 // board initialization
 var board = [];
 var row = [];
-var square = [];
+var square = '';
 for (var j = 0; j < 7; j++) {
   row.push(square);
 }
@@ -59,6 +59,11 @@ class Board extends React.Component {
 
   placePiece(x, y) {
     console.log(x, y)
+    board[x][y] = this.state.turn;
+    this.setState({board: board});
+    // board = this.state.board;
+    // board[x][y] = this.state.turn;
+    // this.setState({board: board});
     // set the value of the square to the turn
     // if the turn is red, change to black
     // if the turn is black, change to red
@@ -68,9 +73,9 @@ class Board extends React.Component {
     return (
       <div className="board">
         Game Board
-        {board.map((row) => {
-          rowNum += 1;
-          return <Row placePiece={this.placePiece.bind(this)} key={rowNum} row={rowNum}/>
+        {board.map((row, rowIndex) => {
+          // rowNum += 1;
+          return <Row placePiece={this.placePiece.bind(this)} key={rowIndex} row={rowIndex}/>
         })}
       </div>
     );
@@ -82,10 +87,10 @@ class Board extends React.Component {
 function Row(props) {
   return (
     <div className='row'>
-      {row.map((square) => {
-        colNum++;
-        colNum = colNum % 7;
-        return <Square placePiece={props.placePiece} key={colNum} x={props.row} y={colNum}/>
+      {row.map((square, colIndex) => {
+        // colNum++;
+        // colNum = colNum % 7;
+        return <Square placePiece={props.placePiece} key={colIndex} x={props.row} y={colIndex}/>
       })}
     </div>
   )
