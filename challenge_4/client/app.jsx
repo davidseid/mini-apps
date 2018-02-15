@@ -30,9 +30,9 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
-// Set up click listener on buttons
-// on the click, bubble up to a function on the app which
-// handles bowls
+// BowlHandler
+// On receiving a click
+// update the bowl
 
 
 
@@ -216,7 +216,32 @@ class App extends React.Component {
   }
 
   bowlHandler(pins) {
-    console.log('hi');
+    console.log(pins)
+    // update the bowl
+    if (this.state.currentBowl === 1 && pins !== 10) {
+      this.setState({
+        currentBowl: 2
+      })
+    } else if (this.state.currentBowl === 1 && pins === 10) {
+      this.setState({
+        currentFrame: (this.state.currentFrame + 1)
+      })
+    } else {
+
+      if (this.state.currentBowl === 2) {
+
+        if (this.state.currentFrame !== 10) {
+          this.setState({
+            currentBowl: 1,
+            currentFrame: (this.state.currentFrame + 1)
+          })
+        } else {
+          this.setState({
+            totalScore: 'game over'
+          })
+        }
+      }
+    }
   }
 
   render() {
