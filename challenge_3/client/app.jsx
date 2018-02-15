@@ -215,8 +215,8 @@ function Row(props) {
 // make a square component
 function Square(props) {
   return (
-    <div className="container" style={{background: 'blue'}}>
-     <div onClick={() => {props.placePiece(props.x, props.y)}} className='square' style={{background: board[props.x][props.y]}}>
+    <div className="container" onClick={() => {props.placePiece(props.x, props.y)}} style={{background: 'blue'}}>
+     <div className='square' style={{background: board[props.x][props.y]}}>
       </div>
     </div>
   )
