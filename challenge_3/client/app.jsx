@@ -36,7 +36,75 @@ var checkForRowWin = (color, board) => {
   return false;
 }
 
+// check for vertical win 
+var checkForColumnWin = (color, board, column) => {
+  //loop through the first three rows
+  // if the column is color
+    // if the colum in the next row is color
+      // if the column in the next row is color
+        // if the column in the next row is color
+          // return true
+  // return false
+  for (var i = 0; i < 3; i++) {
+    if (board[i][column] === color) {
+      if (board[i + 1][column] === color) {
+        if (board[i + 2][column] === color) {
+          if (board[i + 3][column] === color) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+  return false
+}
 
+// check for diagonal wins
+var checkForMajorDiagonalWin = (color, board, x, y) => {
+  var diagCount = 1;
+  if (board[x + 1] && board[x + 1][y - 1] === color) {
+    diagCount++;
+    if (board[x + 2] && board[x + 2][y - 2] === color) {
+      diagCount++;
+    } if (board[x + 3] && board[x + 3][y - 3] === color) {
+      return true;
+    }
+  }
+
+  if (board[x - 1] && board[x - 1][y + 1] === color) {
+    diagCount++;
+    if (board[x - 2] && board[x - 2][y + 2] === color) {
+      diagCount++;
+      if (board[x - 3] && board[x - 3][y + 3] === color) {
+        return true;
+      }
+    } 
+  }
+  return diagCount >= 4 ? true : false;
+}
+
+var checkForMinorDiagonalWin = (color, board, x, y) => {
+  var diagCount = 1;
+  if (board[x - 1] && board[x - 1][y - 1] === color) {
+    diagCount++;
+    if (board[x - 2] && board[x - 2][y - 2] === color) {
+      diagCount++;
+    } if (board[x - 3] && board[x - 3][y - 3] === color) {
+      return true;
+    }
+  }
+
+  if (board[x + 1] && board[x + 1][y + 1] === color) {
+    diagCount++;
+    if (board[x + 2] && board[x + 2][y + 2] === color) {
+      diagCount++;
+      if (board[x + 3] && board[x + 3][y + 3] === color) {
+        return true;
+      }
+    } 
+  }
+  return diagCount >= 4 ? true : false;
+}
 
 
 
@@ -103,11 +171,24 @@ class Board extends React.Component {
       }
     }
 
-    if (checkForRowWin('black', this.state.board)) {
+    if (checkForRowWin('black', this.state.board) || checkForColumnWin('black', this.state.board, y)) {
       console.log('black wins');
     }
-    if (checkForRowWin('red', this.state.board)) {
+    if (checkForRowWin('red', this.state.board) || checkForColumnWin('red', this.state.board, y)) {
       console.log('red wins');
+    }
+
+    if (checkForMajorDiagonalWin('red', this.state.board, rowToChange, y)) {
+      console.log('red wins by diagonal');
+    }
+    if (checkForMajorDiagonalWin('black', this.state.board, rowToChange, y)) {
+      console.log('black wins by diagonal');
+    }
+    if (checkForMinorDiagonalWin('red', this.state.board, rowToChange, y)) {
+      console.log('red wins by diagonal');
+    }
+    if (checkForMinorDiagonalWin('black', this.state.board, rowToChange, y)) {
+      console.log('black wins by diagonal');
     }
     
   }
