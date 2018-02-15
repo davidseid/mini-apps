@@ -95,15 +95,26 @@ var FrameComponent = (props) => {
   return (
     <div class="frame">
       Frame
+      <FrameNum frameNum={props.frameNum}/>
+      <BowlScore />
+      <BowlScore />
+      <FrameScore />
+      <CumulativeScore />
     </div>
   )
 }
 
 // Tenth Frame
-var TenthFrameComponent = () => {
+var TenthFrameComponent = (props) => {
   return (
     <div class="tenth-frame">
       Tenth Frame
+      <FrameNum frameNum={props.frameNum}/>
+      <BowlScore />
+      <BowlScore />
+      <BowlScore />
+      <FrameScore />
+      <CumulativeScore />
     </div>
   )
 }
