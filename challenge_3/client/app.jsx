@@ -14,9 +14,33 @@
 // use nodemon
 
 
+// MAKE MY GAME LOGIC
 
-// 1. Instead of registering a click from a specific row, pass up the column 
-// then check to see the row number that should be updated, and update that
+// check for row win
+var checkForRowWin = (color, board) => {
+  for (var i = 0; i < board.length; i++) {
+    var row = board[i];
+    for (var j = 0; j < 3; j++) {
+      var square = row[j];
+      if (square === color) {
+        if (row[j+1] && row[j+1] === color) {
+          if (row[j+2] && row[j+2] === color) {
+            if (row[j+3] && row[j+3] === color) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+
+
+
+
+
+
 
 
 //**** MY MODEL **** //
@@ -69,14 +93,21 @@ class Board extends React.Component {
 
       this.setState({slots: slots})
 
-
-      board[rowToChange][y] = this.state.turn;
-      this.setState({board: board});
+      var newBoard = this.state.board;
+      newBoard[rowToChange][y] = this.state.turn;
+      this.setState({board: newBoard});
       if (this.state.turn === 'red') {
         this.setState({turn: 'black'})
       } else if (this.state.turn === 'black') {
         this.setState({turn: 'red'})
       }
+    }
+
+    if (checkForRowWin('black', this.state.board)) {
+      console.log('black wins');
+    }
+    if (checkForRowWin('red', this.state.board)) {
+      console.log('red wins');
     }
     
   }
