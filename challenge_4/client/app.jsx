@@ -58,6 +58,14 @@ class TenthFrame extends Frame {
   }
 }
 
+var frames = [];
+
+for (var i = 1; i < 10; i++) {
+  frames.push(new Frame(i))
+}
+
+frames.push(new TenthFrame());
+
 
 
 
