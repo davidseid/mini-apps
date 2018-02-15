@@ -15,7 +15,8 @@
 
 
 
-// 1. Allow the user to click on a box and have it turn red
+// 1. Instead of registering a click from a specific row, pass up the column 
+// then check to see the row number that should be updated, and update that
 
 
 //**** MY MODEL **** //
@@ -53,24 +54,31 @@ class Board extends React.Component {
     this.state = { 
       board: board,
       turn: 'red',
-      result: null
+      result: null,
+      slots: [5, 5, 5, 5, 5, 5, 5]
     };
   }
 
   placePiece(x, y) {
-    board[x][y] = this.state.turn;
-    this.setState({board: board});
-    if (this.state.turn === 'red') {
-      this.setState({turn: 'black'})
-    } else if (this.state.turn === 'black') {
-      this.setState({turn: 'red'})
+
+    var rowToChange = this.state.slots[y];
+    var slots = this.state.slots;
+
+    if (slots[y] >= 0) {
+      slots[y]--;
+
+      this.setState({slots: slots})
+
+
+      board[rowToChange][y] = this.state.turn;
+      this.setState({board: board});
+      if (this.state.turn === 'red') {
+        this.setState({turn: 'black'})
+      } else if (this.state.turn === 'black') {
+        this.setState({turn: 'red'})
+      }
     }
-    // board = this.state.board;
-    // board[x][y] = this.state.turn;
-    // this.setState({board: board});
-    // set the value of the square to the turn
-    // if the turn is red, change to black
-    // if the turn is black, change to red
+    
   }
 
   render() {
