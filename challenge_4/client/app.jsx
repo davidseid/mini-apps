@@ -60,7 +60,7 @@ for (var i = 1; i < 10; i++) {
 frames.push(new TenthFrame());
 
 var options = [];
-for (var j = 1; j < 10; j++) {
+for (var j = 1; j < 11; j++) {
   options.push(j);
 }
 
@@ -110,7 +110,7 @@ var Keypad = () => {
 var Option = (props) => {
   return (
     <div class="option">
-      Option
+    <button></button>
     </div>
   )
 }
