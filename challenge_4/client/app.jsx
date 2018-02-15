@@ -30,6 +30,7 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
+// Put the data structure onto the app and pass down
 // Pass down the currentFrame and the currentBowl from the state to the UI
 
 
@@ -68,30 +69,29 @@ for (var j = 1; j < 11; j++) {
 // *** Build Components Skeleton ***
 
 // UI Interface Component
-var Interface = () => {
+var Interface = (props) => {
   return (
     <div class="interface">
-      Interface
-      <CurrentFrame />
-      <CurrentBowl />
+      <CurrentFrame currentFrame={props.currentFrame}/>
+      <CurrentBowl currentBowl={props.currentBowl}/>
       <Keypad />
     </div>
   )
 }
 
 // Current Frame Component
-var CurrentFrame = () => {
+var CurrentFrame = (props) => {
   return (
     <div class="current-frame">
-      Frame Number: 
+      Frame Number: {props.currentFrame}
     </div>
   )
 }
 // Current Bowl Component
-var CurrentBowl = () => {
+var CurrentBowl = (props) => {
   return (
     <div class="current-bowl">
-      Bowl Number: 
+      Bowl Number: {props.currentBowl}
     </div>
   )
 }
@@ -120,7 +120,7 @@ var Scoreboard = (props) => {
   return (
     <div class="scoreboard">
       Scoreboard
-      {frames.slice(0, 9).map((frame) => {
+      {props.frames.slice(0, 9).map((frame) => {
         return <FrameComponent frameNum={frame.frameNum}/>
       })}
       <TenthFrameComponent frameNum={frames[9].frameNum} />
@@ -134,8 +134,8 @@ var FrameComponent = (props) => {
   return (
     <div class="frame">
       <FrameNum frameNum={props.frameNum}/>
-      <BowlScore />
-      <BowlScore />
+      <BowlScore bowlNum={1} />
+      <BowlScore bowlNum={2} />
       <FrameScore />
       <CumulativeScore />
     </div>
@@ -147,9 +147,9 @@ var TenthFrameComponent = (props) => {
   return (
     <div class="tenth-frame"> 
       <FrameNum frameNum={props.frameNum}/>
-      <BowlScore />
-      <BowlScore />
-      <BowlScore />
+      <BowlScore bowlNum={1} />
+      <BowlScore bowlNum={2} />
+      <BowlScore bowlNum={3} />
       <FrameScore />
       <CumulativeScore />
     </div>
@@ -166,10 +166,10 @@ var FrameNum = (props) => {
 }
 
 // Bowl Score 
-var BowlScore = () => {
+var BowlScore = (props) => {
   return (
     <div class="bowl-score">
-      Bowl Score: 
+      Bowl {props.bowlNum}:
     </div>
   )
 }
@@ -206,10 +206,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      frames: frames,
       currentFrame: 1,
       currentBowl: 1,
-      frameScores: [],
-      cumulativeScores: [],
       totalScore: undefined
     }
   }
@@ -218,8 +217,8 @@ class App extends React.Component {
     return (
       <div>
         Bowling App
-        <Scoreboard />
-        <Interface />
+        <Scoreboard frames={this.state.frames} />
+        <Interface currentFrame={this.state.currentFrame} currentBowl={this.state.currentBowl}/>
       </div>
     )
   }

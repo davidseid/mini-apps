@@ -1,6 +1,20 @@
-div {
+.frame {
   border: 1px solid black;
-  margin: 2px;
+  margin: 5px;
+}
+
+.tenth-frame {
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.final-score {
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.bowl-score {
+  border: .5px solid gray;
 }
 
 .scoreboard {
