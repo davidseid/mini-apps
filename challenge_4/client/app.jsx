@@ -30,7 +30,6 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 // TODO
-// 2. Build the basic scoring components and render them to the DOM in an appropriate fashion
 // 3. Build the UI components and render the basics to the DOM
 
 
@@ -60,22 +59,61 @@ for (var i = 1; i < 10; i++) {
 }
 frames.push(new TenthFrame());
 
+var options = [];
+for (var j = 1; j < 10; j++) {
+  options.push(j);
+}
+
 
 // *** Build Components Skeleton ***
 
-// *** ScoreBoard Components ***
-// Scoreboard Component
-  // Normal Frame Component
-    // Frame Num Component
-    // Bowl Score Components (2)
-    // Frame Score Component
-    // Cummulative Score Component
-  // 10th Frame Component 
-    // Frame Num Component
-    // Bowl Score Components (3)
-    // Frame Score Component
-    // Cummulative Score Component
-  // Final Score Component
+// UI Interface Component
+var Interface = () => {
+  return (
+    <div class="interface">
+      Interface
+      <CurrentFrame />
+      <CurrentBowl />
+      <Keypad />
+    </div>
+  )
+}
+
+// Current Frame Component
+var CurrentFrame = () => {
+  return (
+    <div class="current-frame">
+      CurrentFrame
+    </div>
+  )
+}
+// Current Bowl Component
+var CurrentBowl = () => {
+  return (
+    <div class="current-bowl">
+      CurrentBowl
+    </div>
+  )
+}
+// Keypad Component
+var Keypad = () => {
+  return (
+    <div class="keypad">
+      Keypad
+      {options.map((option) => {
+        return <Option num={option} />
+      })}
+    </div>
+  )
+}
+// Option Component
+var Option = (props) => {
+  return (
+    <div class="option">
+      Option
+    </div>
+  )
+}
 
 // Scoreboard
 var Scoreboard = () => {
@@ -171,6 +209,7 @@ var App = () => {
     <div>
       This is my App
       <Scoreboard />
+      <Interface />
     </div>
   )
 }
