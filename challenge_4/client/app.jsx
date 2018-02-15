@@ -86,6 +86,7 @@ var Scoreboard = () => {
         return <FrameComponent frameNum={frame.frameNum}/>
       })}
       <TenthFrameComponent frameNum={frames[9].frameNum} />
+      <FinalScore />
     </div>
   )
 }
