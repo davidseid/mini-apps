@@ -30,8 +30,10 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
-// Put the data structure onto the app and pass down
-// Pass down the currentFrame and the currentBowl from the state to the UI
+// Set up click listener on buttons
+// on the click, bubble up to a function on the app which
+// handles bowls
+
 
 
 //*** Initialize Frames Data Structure ***
@@ -74,7 +76,7 @@ var Interface = (props) => {
     <div class="interface">
       <CurrentFrame currentFrame={props.currentFrame}/>
       <CurrentBowl currentBowl={props.currentBowl}/>
-      <Keypad />
+      <Keypad bowlHandler={props.bowlHandler}/>
     </div>
   )
 }
@@ -96,12 +98,12 @@ var CurrentBowl = (props) => {
   )
 }
 // Keypad Component
-var Keypad = () => {
+var Keypad = (props) => {
   return (
     <div class="keypad">
       Pins to Hit: 
       {options.map((option) => {
-        return <Option num={option} />
+        return <Option num={option} bowlHandler={props.bowlHandler} />
       })}
     </div>
   )
@@ -109,7 +111,7 @@ var Keypad = () => {
 // Option Component
 var Option = (props) => {
   return (
-    <div class="option">
+    <div class="option" onClick={() => {props.bowlHandler(props.num)}} >
     <button>{props.num}</button>
     </div>
   )
@@ -213,12 +215,16 @@ class App extends React.Component {
     }
   }
 
+  bowlHandler(pins) {
+    console.log('hi');
+  }
+
   render() {
     return (
       <div>
         Bowling App
         <Scoreboard frames={this.state.frames} />
-        <Interface currentFrame={this.state.currentFrame} currentBowl={this.state.currentBowl}/>
+        <Interface currentFrame={this.state.currentFrame} currentBowl={this.state.currentBowl} bowlHandler={this.bowlHandler.bind(this)}/>
       </div>
     )
   }
