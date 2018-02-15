@@ -30,7 +30,7 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
-//
+// Pass down the currentFrame and the currentBowl from the state to the UI
 
 
 //*** Initialize Frames Data Structure ***
@@ -116,7 +116,7 @@ var Option = (props) => {
 }
 
 // Scoreboard
-var Scoreboard = () => {
+var Scoreboard = (props) => {
   return (
     <div class="scoreboard">
       Scoreboard
@@ -202,14 +202,27 @@ var FinalScore = () => {
 }
 
 
-var App = () => {
-  return (
-    <div>
-      Bowling App
-      <Scoreboard />
-      <Interface />
-    </div>
-  )
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentFrame: 1,
+      currentBowl: 1,
+      frameScores: [],
+      cumulativeScores: [],
+      totalScore: undefined
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        Bowling App
+        <Scoreboard />
+        <Interface />
+      </div>
+    )
+  }
 }
 
 
