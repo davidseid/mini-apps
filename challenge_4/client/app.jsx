@@ -30,15 +30,11 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 // TODO
-// 1. Create the model data structure 
-  // Create a frame class
-  // Create a 10th frame class
-  // Create an array of 9 intances of frames and 1 instance of 10th frame
 // 2. Build the basic scoring components and render them to the DOM in an appropriate fashion
 // 3. Build the UI components and render the basics to the DOM
 
 
-//*** Initialize Frame Data Structure ***
+//*** Initialize Frames Data Structure ***
 
 class Frame {
   constructor(frameNum) {
@@ -59,21 +55,110 @@ class TenthFrame extends Frame {
 }
 
 var frames = [];
-
 for (var i = 1; i < 10; i++) {
   frames.push(new Frame(i))
 }
-
 frames.push(new TenthFrame());
 
 
+// *** Build Components Skeleton ***
 
+// *** ScoreBoard Components ***
+// Scoreboard Component
+  // Normal Frame Component
+    // Frame Num Component
+    // Bowl Score Components (2)
+    // Frame Score Component
+    // Cummulative Score Component
+  // 10th Frame Component 
+    // Frame Num Component
+    // Bowl Score Components (3)
+    // Frame Score Component
+    // Cummulative Score Component
+  // Final Score Component
+
+// Scoreboard
+var Scoreboard = () => {
+  return (
+    <div class="scoreboard">
+      Scoreboard
+      {frames.slice(0, 9).map((frame) => {
+        return <FrameComponent frameNum={frame.frameNum}/>
+      })}
+      <TenthFrameComponent frameNum={frames[9].frameNum} />
+    </div>
+  )
+}
+
+// Frame
+var FrameComponent = (props) => {
+  return (
+    <div class="frame">
+      Frame
+    </div>
+  )
+}
+
+// Tenth Frame
+var TenthFrameComponent = () => {
+  return (
+    <div class="tenth-frame">
+      Tenth Frame
+    </div>
+  )
+}
+
+// Frame Num
+var FrameNum = () => {
+  return (
+    <div class="frame-num">
+      Frame Number
+    </div>
+  )
+}
+
+// Bowl Score 
+var BowlScore = () => {
+  return (
+    <div class="bowl-score">
+      Bowl Score
+    </div>
+  )
+}
+
+// Frame Score
+var FrameScore = () => {
+  return (
+    <div class="frame-score">
+      Frame Score
+    </div>
+  )
+}
+
+// Cumulative Score
+var CumulativeScore = () => {
+  return (
+    <div class="cumulative-score">
+      Cumulative Score
+    </div>
+  )
+}
+
+// Final Score
+var FinalScore = () => {
+  return (
+    <div class="final-score">
+      Final Score
+    </div>
+  )
+}
 
 
 var App = () => {
   return (
     <div>
       This is my App
+      <Scoreboard />
     </div>
   )
 }
