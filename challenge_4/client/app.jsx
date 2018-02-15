@@ -29,8 +29,8 @@
 // Make an array containing normal frame objects and a 10th frame object at the end
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
-// TODO
-// 3. Build the UI components and render the basics to the DOM
+//TO DO:
+//
 
 
 //*** Initialize Frames Data Structure ***
@@ -83,7 +83,7 @@ var Interface = () => {
 var CurrentFrame = () => {
   return (
     <div class="current-frame">
-      CurrentFrame
+      Frame Number: 
     </div>
   )
 }
@@ -91,7 +91,7 @@ var CurrentFrame = () => {
 var CurrentBowl = () => {
   return (
     <div class="current-bowl">
-      CurrentBowl
+      Bowl Number: 
     </div>
   )
 }
@@ -99,7 +99,7 @@ var CurrentBowl = () => {
 var Keypad = () => {
   return (
     <div class="keypad">
-      Keypad
+      Pins to Hit: 
       {options.map((option) => {
         return <Option num={option} />
       })}
@@ -110,7 +110,7 @@ var Keypad = () => {
 var Option = (props) => {
   return (
     <div class="option">
-    <button></button>
+    <button>{props.num}</button>
     </div>
   )
 }
@@ -133,7 +133,6 @@ var Scoreboard = () => {
 var FrameComponent = (props) => {
   return (
     <div class="frame">
-      Frame
       <FrameNum frameNum={props.frameNum}/>
       <BowlScore />
       <BowlScore />
@@ -146,8 +145,7 @@ var FrameComponent = (props) => {
 // Tenth Frame
 var TenthFrameComponent = (props) => {
   return (
-    <div class="tenth-frame">
-      Tenth Frame
+    <div class="tenth-frame"> 
       <FrameNum frameNum={props.frameNum}/>
       <BowlScore />
       <BowlScore />
@@ -159,10 +157,10 @@ var TenthFrameComponent = (props) => {
 }
 
 // Frame Num
-var FrameNum = () => {
+var FrameNum = (props) => {
   return (
     <div class="frame-num">
-      Frame Number
+      Frame {props.frameNum}
     </div>
   )
 }
@@ -171,7 +169,7 @@ var FrameNum = () => {
 var BowlScore = () => {
   return (
     <div class="bowl-score">
-      Bowl Score
+      Bowl Score: 
     </div>
   )
 }
@@ -180,7 +178,7 @@ var BowlScore = () => {
 var FrameScore = () => {
   return (
     <div class="frame-score">
-      Frame Score
+      Frame Score: 
     </div>
   )
 }
@@ -189,7 +187,7 @@ var FrameScore = () => {
 var CumulativeScore = () => {
   return (
     <div class="cumulative-score">
-      Cumulative Score
+      Cumulative Score:
     </div>
   )
 }
@@ -207,7 +205,7 @@ var FinalScore = () => {
 var App = () => {
   return (
     <div>
-      This is my App
+      Bowling App
       <Scoreboard />
       <Interface />
     </div>
