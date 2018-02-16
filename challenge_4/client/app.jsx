@@ -29,8 +29,10 @@
 // Make an array containing normal frame objects and a 10th frame object at the end
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
-//TO DO:
-// update frame score whenever a round is changed, update the framescore
+
+
+
+
 
 //*** Initialize Frames Data Structure ***
 
@@ -41,6 +43,7 @@ class Frame {
     this.bowl2 = null;
     this.frameScore = null;
     this.cumulativeScore = null;
+    this.condition = 'open';
   }
 }
 
@@ -208,26 +211,60 @@ class App extends React.Component {
       currentBowl: 1,
       totalScore: undefined,
       options: options,
-      currentOptions: options
+      currentOptions: options,
+      bowls: []
     }
   }
 
   bowlHandler(pins) {
     if (this.state.totalScore === undefined) {
+    
+
+      //TO DO:
+      // each frame has a state: open, spare, strike, closed
+      // if the frame is open when frame over
+        // close it
+      // if the frame is spare when the frame is over
+        // when the next roll is completed
+        // add it to the framescore and close the frame
+      // if the frame is strike when the frame is over
+        // when the next two rolls are completed
+        // add them to the framescore and close the frame
+      
+      // manage the states 
+      // loop through, if there are any spares
+        // check if the next roll exists
+          // if so add it to the spare frame and close the frame
+
+
+
+
+      var bowls = this.state.bowls;
+      bowls.push(pins);
+      this.setState({
+        bowls: bowls
+      });
 
       var newFrames = this.state.frames;
       for (var i = 0; i < newFrames.length; i++) {
         var frame = newFrames[i];
         if (frame.frameNum === this.state.currentFrame) {
           if (this.state.currentBowl=== 1) {
+            if (pins === 10) {
+              frame.condition = 'strike'
+            }
             frame.bowl1 = pins;
           } else if (this.state.currentBowl === 2) {
+            if (frame.bowl1 + pins === 10) {
+              frame.condition = 'spare'
+            }
             frame.bowl2 = pins;
           } else if (this.state.currentBowl === 3) {
             frame.bowl3 = pins;
           }
         }
       }
+
 
       this.setState({
         frames: newFrames
@@ -238,8 +275,10 @@ class App extends React.Component {
       if (this.state.currentFrame !== 10) {
         if (this.state.currentBowl === 1) {
           if (pins === 10) {
+
+
             this.setState({
-              currentFrame: this.state.currentFrame + 1
+              currentFrame: this.state.currentFrame + 1,
             })
           } else {
             this.setState({
@@ -247,6 +286,11 @@ class App extends React.Component {
             })
           }
         } else if (this.state.currentBowl === 2) {
+          if (pins === 10) {
+            this.setState({
+              condition: 'spare'
+            })
+          }
           this.setState({
             currentBowl: this.state.currentBowl - 1,
             currentFrame: this.state.currentFrame + 1
