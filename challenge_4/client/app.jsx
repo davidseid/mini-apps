@@ -268,18 +268,24 @@ class App extends React.Component {
             frame.bowl3 = pins;
           }
         }
-        
-
-        // spare logic
-
+      
         if (frame.frameNum === this.state.currentFrame - 1) {
           if (frame.condition === 'spare') {
             frame.frameScore += pins;
             frame.condition = 'closed'
           }
-
+          if (frame.condition === 'strike') {
+            frame.frameScore += pins;
+          }
         }
 
+        if (frame.frameNum === this.state.currentFrame - 2) {
+          if (frame.condition === 'strike') {
+            frame.frameScore += pins;
+            frame.condition = 'closed'
+          }
+        }
+          
       }
 
 
