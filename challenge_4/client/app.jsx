@@ -30,8 +30,7 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
-// Forgot about remaining pins!!!
-
+// update frame score whenever a round is changed, update the framescore
 
 //*** Initialize Frames Data Structure ***
 
@@ -60,7 +59,7 @@ for (var i = 1; i < 10; i++) {
 frames.push(new TenthFrame());
 
 var options = [];
-for (var j = 1; j < 11; j++) {
+for (var j = 0; j < 11; j++) {
   options.push(j);
 }
 
@@ -134,7 +133,7 @@ var FrameComponent = (props) => {
       <FrameNum frameNum={props.frameNum}/>
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
-      <FrameScore />
+      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2}/>
       <CumulativeScore />
     </div>
   )
@@ -148,7 +147,7 @@ var TenthFrameComponent = (props) => {
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
       <BowlScore bowlNum={3} score={props.frame.bowl3} />
-      <FrameScore />
+      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.bowl3}/>
       <CumulativeScore />
     </div>
   )
@@ -173,10 +172,10 @@ var BowlScore = (props) => {
 }
 
 // Frame Score
-var FrameScore = () => {
+var FrameScore = (props) => {
   return (
     <div class="frame-score">
-      Frame: 
+      Frame: {props.frameScore}
     </div>
   )
 }
@@ -215,31 +214,6 @@ class App extends React.Component {
 
   bowlHandler(pins) {
     if (this.state.totalScore === undefined) {
-
-
-      // if it is the second bowl
-        // if the pins is <= 10 - pins from the first bowl... proceed
-
-      //       if (this.state.currentBowl === 2) {
-      //   // find the result of the prevous bowl
-      //   // get the frame from frames at index currentFrame -1
-      //   var thisFrame = this.state.frames[this.state.currentFrame - 1];
-      //   var firstBowl = thisFrame.bowl1;
-
-      //   if (pins <= (10 - firstBowl)) {
-      //     // put all my logic here
-      //   }
-      // }
-
-
-      // insted of changing this in my game logic, just remove the buttons!
-      // on state, keep my all options there
-      // on state, keep my current options as a subset
-      // only render my current options
-      // in my game logic, if my bowl is 1, change current options to 10 - pins
-      // if my bowl is 2, change current options to options 
-
-
 
       var newFrames = this.state.frames;
       for (var i = 0; i < newFrames.length; i++) {
@@ -299,10 +273,9 @@ class App extends React.Component {
       }
 
       if (this.state.currentBowl === 1) {
-        // 10 - pins = remaining options
         var remainingPins = 10 - pins;
         var remainingOptions = [];
-        for (var k = 1; k <= remainingPins; k++) {
+        for (var k = 0; k <= remainingPins; k++) {
           remainingOptions.push(k)
         }
         this.setState({
@@ -319,8 +292,6 @@ class App extends React.Component {
         })
       }
     }
-
-
     
   }
 
