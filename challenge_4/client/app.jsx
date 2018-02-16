@@ -136,7 +136,7 @@ var FrameComponent = (props) => {
       <FrameNum frameNum={props.frameNum}/>
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
-      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.frameScore}/>
+      <FrameScore frameScore={props.frame.frameScore}/>
       <CumulativeScore />
     </div>
   )
@@ -150,7 +150,7 @@ var TenthFrameComponent = (props) => {
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
       <BowlScore bowlNum={3} score={props.frame.bowl3} />
-      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.bowl3 + props.frame.frameScore}/>
+      <FrameScore frameScore={props.frame.frameScore}/>
       <CumulativeScore />
     </div>
   )
@@ -247,9 +247,6 @@ class App extends React.Component {
       // change that frame's condition to closed
 
 
-
-
-
       var newFrames = this.state.frames;
       for (var i = 0; i < newFrames.length; i++) {
         var frame = newFrames[i];
@@ -264,8 +261,10 @@ class App extends React.Component {
               frame.condition = 'spare'
             }
             frame.bowl2 = pins;
+            frame.frameScore = frame.bowl1 + frame.bowl2;
           } else if (this.state.currentBowl === 3) {
             frame.bowl3 = pins;
+            frame.frameScore = frame.frameScore + frame.bowl3;
           }
         }
       
@@ -278,6 +277,7 @@ class App extends React.Component {
             frame.frameScore += pins;
           }
         }
+
 
         if (frame.frameNum === this.state.currentFrame - 2) {
           if (frame.condition === 'strike') {
