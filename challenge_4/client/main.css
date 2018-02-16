@@ -18,6 +18,7 @@ body {
 .final-score {
   border: 1px solid black;
   margin: 5px;
+  background-color: white;
 }
 
 .bowl-score {

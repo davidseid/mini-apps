@@ -32,8 +32,7 @@
 //TO DO:
 // BowlHandler
 // On receiving a click
-// update the bowl
-
+// add the pins number to each bowl correctly
 
 
 //*** Initialize Frames Data Structure ***
@@ -216,20 +215,37 @@ class App extends React.Component {
   }
 
   bowlHandler(pins) {
-   
 
-   // if not 10th frame
-     // if bowl is 1
-       // increment bowl
-     // if bowl is 2
-       // decrement bowl and increment frame
+    // pass the pins value to the frame state
+    if (this.state.totalScore === undefined) {
+      // loop through the frames to find the currentFrame
+        // if the current bowl is 1
+          // add pins to the  bowl1
+        // if the current bowl is 2
+          // add pins to the bowl 2
+        // if the current bowl is 3
+          // add pins to the bowl 3
+      var newFrames = this.state.frames;
+      for (var i = 0; i < newFrames.length; i++) {
+        var frame = newFrames[i];
+        if (frame.frameNum === this.state.currentFrame) {
+          if (this.state.currentBowl=== 1) {
+            frame.bowl1 = pins;
+          } else if (this.state.currentBowl === 2) {
+            frame.bowl2 = pins;
+          } else if (this.state.currentBowl === 3) {
+            frame.bowl3 = pins;
+          }
+        }
+      }
 
-   // if 10th frame
-     // if bowl is 1 || 2 
-       // increment bowl
-     // if bowl is 3
-       // end game
+      this.setState({
+        frames: newFrames
+      })
+    }
 
+
+    // Game Logic
     if (this.state.currentFrame !== 10) {
       if (this.state.currentBowl === 1) {
         if (pins === 10) {
@@ -265,67 +281,7 @@ class App extends React.Component {
           totalScore: 'game over'
         })
       }
-
-
-
-      // if (this.state.currentBowl === 1 || this.state.currentBowl === 2) {
-      //   this.setState({
-      //     currentBowl: this.state.currentBowl + 1
-      //   })
-      // } else if (this.state.currentBowl === 3) {
-      //   this.setState({
-      //     totalScore: 'game over'
-      //   })
-      // }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (this.state.currentBowl === 1 && pins !== 10) {
-    //   this.setState({
-    //     currentBowl: 2
-    //   })
-    // } else if (this.state.currentBowl === 1 && pins === 10) {
-      
-    //   if (this.state.currentFrame !== 10) {
-    //     this.setState({
-    //       currentFrame: (this.state.currentFrame + 1)
-    //     })
-    //   } else if (this.state.currentBowl !== 3) {
-    //     this.setState({
-    //       currentBowl: (this.state.currentBowl + 1)
-    //     })
-    //   } else if (this.state.currentBowl === 3) {
-    //     this.setState({
-    //       totalScore: 'game over'
-    //     })
-    //   }
-
-    // } else {
-
-    //   if (this.state.currentBowl === 2) {
-
-    //     if (this.state.currentFrame !== 10) {
-    //       this.setState({
-    //         currentBowl: 1,
-    //         currentFrame: (this.state.currentFrame + 1)
-    //       })
-    //     } else {
-    //       this.setState({
-    //         totalScore: 'game over'
-    //       })
-    //     }
-    //   }
-    // }
   }
 
   render() {
