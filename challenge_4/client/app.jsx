@@ -136,7 +136,7 @@ var FrameComponent = (props) => {
       <FrameNum frameNum={props.frameNum}/>
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
-      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2}/>
+      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.frameScore}/>
       <CumulativeScore />
     </div>
   )
@@ -150,7 +150,7 @@ var TenthFrameComponent = (props) => {
       <BowlScore bowlNum={1} score={props.frame.bowl1} />
       <BowlScore bowlNum={2} score={props.frame.bowl2} />
       <BowlScore bowlNum={3} score={props.frame.bowl3} />
-      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.bowl3}/>
+      <FrameScore frameScore={props.frame.bowl1 + props.frame.bowl2 + props.frame.bowl3 + props.frame.frameScore}/>
       <CumulativeScore />
     </div>
   )
@@ -236,14 +236,19 @@ class App extends React.Component {
         // check if the next roll exists
           // if so add it to the spare frame and close the frame
 
-
-
-
       var bowls = this.state.bowls;
       bowls.push(pins);
       this.setState({
         bowls: bowls
       });
+
+      // check the previous frame for a spare condition
+      // if spare, add pins to the that frame's score
+      // change that frame's condition to closed
+
+
+
+
 
       var newFrames = this.state.frames;
       for (var i = 0; i < newFrames.length; i++) {
@@ -263,7 +268,20 @@ class App extends React.Component {
             frame.bowl3 = pins;
           }
         }
+        
+
+        // spare logic
+
+        if (frame.frameNum === this.state.currentFrame - 1) {
+          if (frame.condition === 'spare') {
+            frame.frameScore += pins;
+            frame.condition = 'closed'
+          }
+
+        }
+
       }
+
 
 
       this.setState({
