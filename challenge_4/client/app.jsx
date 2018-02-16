@@ -30,9 +30,7 @@
 // normal frame objects have: framenum, bowl1 and bowl2 properties, framescore prop, and cumulative score prop
 
 //TO DO:
-// BowlHandler
-// On receiving a click
-// add the pins number to each bowl correctly
+// Forgot about remaining pins!!!
 
 
 //*** Initialize Frames Data Structure ***
@@ -40,10 +38,10 @@
 class Frame {
   constructor(frameNum) {
     this.frameNum = frameNum;
-    this.bowl1 = 0;
-    this.bowl2 = 0;
-    this.frameScore = 0;
-    this.cumulativeScore = 0;
+    this.bowl1 = null;
+    this.bowl2 = null;
+    this.frameScore = null;
+    this.cumulativeScore = null;
   }
 }
 
@@ -51,7 +49,7 @@ class TenthFrame extends Frame {
   constructor() {
     super();
     this.frameNum = 10;
-    this.bowl3 = 0;
+    this.bowl3 = null;
   }
 }
 
@@ -84,7 +82,7 @@ var Interface = (props) => {
 var CurrentFrame = (props) => {
   return (
     <div class="current-frame">
-      Frame Number: {props.currentFrame}
+      Frame: {props.currentFrame}
     </div>
   )
 }
@@ -92,7 +90,7 @@ var CurrentFrame = (props) => {
 var CurrentBowl = (props) => {
   return (
     <div class="current-bowl">
-      Bowl Number: {props.currentBowl}
+      Bowl: {props.currentBowl}
     </div>
   )
 }
@@ -120,11 +118,10 @@ var Option = (props) => {
 var Scoreboard = (props) => {
   return (
     <div class="scoreboard">
-      Scoreboard
       {props.frames.slice(0, 9).map((frame) => {
-        return <FrameComponent frameNum={frame.frameNum}/>
+        return <FrameComponent frameNum={frame.frameNum} frame={frame}/>
       })}
-      <TenthFrameComponent frameNum={frames[9].frameNum} />
+      <TenthFrameComponent frameNum={frames[9].frameNum} frame={frames[9]} />
       <FinalScore />
     </div>
   )
@@ -135,8 +132,8 @@ var FrameComponent = (props) => {
   return (
     <div class="frame">
       <FrameNum frameNum={props.frameNum}/>
-      <BowlScore bowlNum={1} />
-      <BowlScore bowlNum={2} />
+      <BowlScore bowlNum={1} score={props.frame.bowl1} />
+      <BowlScore bowlNum={2} score={props.frame.bowl2} />
       <FrameScore />
       <CumulativeScore />
     </div>
@@ -148,9 +145,9 @@ var TenthFrameComponent = (props) => {
   return (
     <div class="tenth-frame"> 
       <FrameNum frameNum={props.frameNum}/>
-      <BowlScore bowlNum={1} />
-      <BowlScore bowlNum={2} />
-      <BowlScore bowlNum={3} />
+      <BowlScore bowlNum={1} score={props.frame.bowl1} />
+      <BowlScore bowlNum={2} score={props.frame.bowl2} />
+      <BowlScore bowlNum={3} score={props.frame.bowl3} />
       <FrameScore />
       <CumulativeScore />
     </div>
@@ -170,7 +167,7 @@ var FrameNum = (props) => {
 var BowlScore = (props) => {
   return (
     <div class="bowl-score">
-      Bowl {props.bowlNum}:
+      {props.score}
     </div>
   )
 }
@@ -179,7 +176,7 @@ var BowlScore = (props) => {
 var FrameScore = () => {
   return (
     <div class="frame-score">
-      Frame Score: 
+      Frame: 
     </div>
   )
 }
@@ -188,7 +185,7 @@ var FrameScore = () => {
 var CumulativeScore = () => {
   return (
     <div class="cumulative-score">
-      Cumulative Score:
+      Cumulative:
     </div>
   )
 }
@@ -215,16 +212,33 @@ class App extends React.Component {
   }
 
   bowlHandler(pins) {
-
-    // pass the pins value to the frame state
     if (this.state.totalScore === undefined) {
-      // loop through the frames to find the currentFrame
-        // if the current bowl is 1
-          // add pins to the  bowl1
-        // if the current bowl is 2
-          // add pins to the bowl 2
-        // if the current bowl is 3
-          // add pins to the bowl 3
+
+
+      // if it is the second bowl
+        // if the pins is <= 10 - pins from the first bowl... proceed
+
+      //       if (this.state.currentBowl === 2) {
+      //   // find the result of the prevous bowl
+      //   // get the frame from frames at index currentFrame -1
+      //   var thisFrame = this.state.frames[this.state.currentFrame - 1];
+      //   var firstBowl = thisFrame.bowl1;
+
+      //   if (pins <= (10 - firstBowl)) {
+      //     // put all my logic here
+      //   }
+      // }
+
+
+      // insted of changing this in my game logic, just remove the buttons!
+      // on state, keep my all options there
+      // on state, keep my current options as a subset
+      // only render my current options
+      // in my game logic, if my bowl is 1, change current options to 10 - pins
+      // if my bowl is 2, change current options to options 
+
+
+
       var newFrames = this.state.frames;
       for (var i = 0; i < newFrames.length; i++) {
         var frame = newFrames[i];
