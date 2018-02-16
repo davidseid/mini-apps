@@ -73,7 +73,7 @@ var Interface = (props) => {
     <div class="interface">
       <CurrentFrame currentFrame={props.currentFrame}/>
       <CurrentBowl currentBowl={props.currentBowl}/>
-      <Keypad bowlHandler={props.bowlHandler}/>
+      <Keypad options={props.options} bowlHandler={props.bowlHandler}/>
     </div>
   )
 }
@@ -99,7 +99,7 @@ var Keypad = (props) => {
   return (
     <div class="keypad">
       Pins to Hit: 
-      {options.map((option) => {
+      {props.options.map((option) => {
         return <Option num={option} bowlHandler={props.bowlHandler} />
       })}
     </div>
@@ -207,7 +207,9 @@ class App extends React.Component {
       frames: frames,
       currentFrame: 1,
       currentBowl: 1,
-      totalScore: undefined
+      totalScore: undefined,
+      options: options,
+      currentOptions: options
     }
   }
 
@@ -256,46 +258,70 @@ class App extends React.Component {
       this.setState({
         frames: newFrames
       })
-    }
 
 
-    // Game Logic
-    if (this.state.currentFrame !== 10) {
-      if (this.state.currentBowl === 1) {
-        if (pins === 10) {
+      // Game Logic
+      if (this.state.currentFrame !== 10) {
+        if (this.state.currentBowl === 1) {
+          if (pins === 10) {
+            this.setState({
+              currentFrame: this.state.currentFrame + 1
+            })
+          } else {
+            this.setState({
+              currentBowl: this.state.currentBowl + 1
+            })
+          }
+        } else if (this.state.currentBowl === 2) {
           this.setState({
+            currentBowl: this.state.currentBowl - 1,
             currentFrame: this.state.currentFrame + 1
           })
-        } else {
+        }
+      } else if (this.state.currentFrame === 10) {
+        if (this.state.currentBowl === 3) {
+          this.setState({
+            totalScore: 'game over'
+          })
+        } else if (this.state.currentBowl === 1) {
           this.setState({
             currentBowl: this.state.currentBowl + 1
           })
+        } else if (this.state.currentBowl === 2 && pins === 10) {
+          this.setState({
+            currentBowl: this.state.currentBowl + 1
+          })
+        } else if (this.state.currentBowl === 2 && pins !== 10) {
+          this.setState({
+            totalScore: 'game over'
+          })
         }
+      }
+
+      if (this.state.currentBowl === 1) {
+        // 10 - pins = remaining options
+        var remainingPins = 10 - pins;
+        var remainingOptions = [];
+        for (var k = 1; k <= remainingPins; k++) {
+          remainingOptions.push(k)
+        }
+        this.setState({
+          currentOptions: remainingOptions
+        })
       } else if (this.state.currentBowl === 2) {
         this.setState({
-          currentBowl: this.state.currentBowl - 1,
-          currentFrame: this.state.currentFrame + 1
+          currentOptions: this.state.options
         })
       }
-    } else if (this.state.currentFrame === 10) {
-      if (this.state.currentBowl === 3) {
+      if (pins === 10) {
         this.setState({
-          totalScore: 'game over'
-        })
-      } else if (this.state.currentBowl === 1) {
-        this.setState({
-          currentBowl: this.state.currentBowl + 1
-        })
-      } else if (this.state.currentBowl === 2 && pins === 10) {
-        this.setState({
-          currentBowl: this.state.currentBowl + 1
-        })
-      } else if (this.state.currentBowl === 2 && pins !== 10) {
-        this.setState({
-          totalScore: 'game over'
+          currentOptions: this.state.options
         })
       }
     }
+
+
+    
   }
 
   render() {
@@ -303,7 +329,7 @@ class App extends React.Component {
       <div>
         Bowling App
         <Scoreboard frames={this.state.frames} />
-        <Interface currentFrame={this.state.currentFrame} currentBowl={this.state.currentBowl} bowlHandler={this.bowlHandler.bind(this)}/>
+        <Interface options={this.state.currentOptions} currentFrame={this.state.currentFrame} currentBowl={this.state.currentBowl} bowlHandler={this.bowlHandler.bind(this)}/>
       </div>
     )
   }
